@@ -34,6 +34,7 @@ jobs:
   env:
    VAR1: "this is job level variable1"
    VAR2: "this is job level variable2"
+   
   steps:
   - name: Print Hello Message
     run: echo "Hello World from Deploy"  
@@ -42,7 +43,7 @@ jobs:
     run: |
       echo "VAR1=${{env.VAR1}}"
       echo "VAR2=${{env.VAR2}}"
-      echo "VAR3=$LOCAL_VAR
+      echo "VAR3=$LOCAL_VAR"
     env:
      LOCAL_VAR: "THIS is local super var"
     
