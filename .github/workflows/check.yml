@@ -10,20 +10,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install deps
+      - name: Install apache2
         run: sudo apt-get install -y apache2
       
       - name: Watch apache2 version
         run: apache2 -v
 
-  test:
+  sec_job:
+    needs: [fir_job]
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install deps
+      - name: Install postgresql
         run: sudo apt-get install -y postgresql
       
       - name: Watch postgres version
