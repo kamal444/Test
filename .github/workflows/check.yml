@@ -2,39 +2,34 @@ name: Check
 on: push
 
 jobs:
+ fir_job:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
 
-  fir_job:
-    runs-on: ubuntu-latest
-    steps:
+    - name: Install apache2
+      run: sudo apt-get install -y apache2
 
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Check npm version
-        run: npm --version  # Проверка версии npm
+    - name: Watch apache2 version
+      run: apache2 -v
 
-      - name: Install deps
-        run: npm install
-      
-      - name: Lint
-        run: npm run lint
+ sec_job:
+  needs: [fir_job]
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout
+     uses: actions/checkout@v4
 
-  sec_job:
-    needs: [fir_job]
-    strategy: #Конструкция strategy.matrix нужна чтобы применить один job с разными параметрами
-      matrix:
-        version: [14,16,18]
-    runs-on: ubuntu-latest
-    steps:
+   - name: Install postgresql
+     run: sudo apt-get install -y postgresql
 
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{matrix.version}}
+   - name: Watch postgres version
+     run: psql --version
+  
+ secret:
+  runs-on: ubuntu-latest
 
-      - name: Install postgresql
-        run: sudo apt-get install -y postgresql
-      
-      - name: Watch postgres version
-        run: psql --version
+  steps:
+   - name: Print secret
+     run: echo ${{ secrets.TEST }}
