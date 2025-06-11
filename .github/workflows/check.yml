@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install deps
-        run: sudo apt-get install apache2
+        run: sudo apt-get install -y apache2
       
       - name: Watch apache2 version
         run: apache2 -v
@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install deps
-        run: sudo apt-get install postgres
+        run: sudo apt-get install -y postgresql
       
       - name: Watch postgres version
         run: postgres --version
