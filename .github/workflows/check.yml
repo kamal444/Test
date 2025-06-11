@@ -9,6 +9,9 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Check npm version
+        run: npm --version  # Проверка версии npm
 
       - name: Install deps
         run: npm install
