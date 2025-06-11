@@ -1,0 +1,17 @@
+name: Check
+on: push
+
+jobs:
+
+  fir_job:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install deps
+        run: apt install apache2
+      
+      - name: Watch folder
+        run: ls -la
